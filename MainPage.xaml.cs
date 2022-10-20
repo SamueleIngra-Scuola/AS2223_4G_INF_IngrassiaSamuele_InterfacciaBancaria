@@ -17,6 +17,7 @@ public partial class MainPage : ContentPage
     {
         public string AccName { get; }
         public string CC { get; }
+        public float Balance { get; }
 
         public Holder() { }
 
@@ -24,6 +25,7 @@ public partial class MainPage : ContentPage
         {
             this.AccName = AccName;
             this.CC = CC;
+            Balance = 0;
         }
 
         public Holder(string line)
@@ -32,12 +34,13 @@ public partial class MainPage : ContentPage
 
             AccName = token[0];
             CC = token[1];
+            Balance = 0;
         }
 
         //GetInfo Methods
         public string GetHolderInfo()
         {
-            return $"{AccName} | {CC}";
+            return $"{AccName} | {CC} | {Balance}";
         }
     }
 
@@ -106,15 +109,26 @@ public partial class MainPage : ContentPage
         {
             if (txtHolder.Text != null && txtCC.Text != null)
             {
-                string accountDetails = $"{txtHolder.Text},{txtCC.Text}" + Environment.NewLine;
+                string accountDetails = $"{txtHolder.Text},{txtCC.Text},{0}" + Environment.NewLine;
                 File.AppendAllText(txtPath.Text, accountDetails);
                 await DisplayAlert("Successo", "Hai creato un nuovo conto!", "Ho capito");
+                txtHolder.Text = "";
+                txtCC.Text = "";
             }
             else
                 await DisplayAlert("Errore", "Inserisci tutte le informazioni del correntista", "Ho capito");
         }
         else
             await DisplayAlert("Errore", "Non puoi salvare il conto da nessuna parte, carica un file CSV", "Ho capito");
+    }
+
+    private async void Deposit_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Errore", "Funzione Sperimentale!", "Ho capito");
+    }
+    private async void Withdraw_Clicked(object sender, EventArgs e)
+    {
+        await DisplayAlert("Errore", "Funzione Sperimentale!", "Ho capito");
     }
 }
 
