@@ -6,34 +6,95 @@
     <ScrollView>
         <VerticalStackLayout
             Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+            Padding="10"
+            VerticalOptions="Start">
 
-            <Image
-                Source="dotnet_bot.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <VerticalStackLayout
+                    Spacing="5">
+                    <HorizontalStackLayout
+                        Spacing="10">
+                        <Label
+                            Text="Nome Correntista"
+                        />
+                        <Entry
+                            x:Name="txtHolder"
+                            Placeholder="ES: Franco Spazzini"
+                            WidthRequest="200"
+                        />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout
+                        Spacing="10">
+                        <Label
+                            Text="Numero Conto Corrente"
+                        />
+                        <Entry
+                            x:Name="txtCC"
+                            Placeholder="ES: L1104728210A"
+                            WidthRequest="200"
+                        />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout
+                        Spacing="10">
+                        <Label
+                            Text="File CSV Lista"
+                        />
+                        <Entry
+                            x:Name="txtPath"
+                            Placeholder="Sorgente File"
+                            WidthRequest="300"
+                        />
+                        <Button
+                            x:Name="btnBrowsePath"
+                            Text="..."
+                            Clicked="Browse_Clicked"
+                        />
+                    </HorizontalStackLayout>
+                    <HorizontalStackLayout
+                        Spacing="10">
+                        <Button
+                            x:Name="btnCreateAccount"
+                            Text="Crea Conto"
+                            Clicked="CreateAccount_Clicked"
+                        />
+                    </HorizontalStackLayout>
+                </VerticalStackLayout>
 
-            <Label
-                Text="Hello, World!"
-                SemanticProperties.HeadingLevel="Level1"
-                FontSize="32"
-                HorizontalOptions="Center" />
+            </Grid>
 
-            <Label
-                Text="Welcome to .NET Multi-platform App UI"
-                SemanticProperties.HeadingLevel="Level2"
-                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
-                FontSize="18"
-                HorizontalOptions="Center" />
+            <VerticalStackLayout>
+                <Button
+                    x:Name="btnSearch"
+                    Text="Stampa"
+                    SemanticProperties.Hint="Visualizza la Rubrica"
+                    Clicked="Print_Clicked"
+                    HorizontalOptions="Center" 
+                />
 
-            <Button
-                x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
+                <ListView
+                    x:Name="lstHolders"
+                    Header="Lista Correntisti (0 Correntisti)"
+                    ItemsSource="{Binding HoldersList}"
+                    HorizontalOptions="Center">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Context Menu Option" />
+                                </ViewCell.ContextActions>
+                                <Label Text="{Binding .}" />
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </VerticalStackLayout>
 
         </VerticalStackLayout>
     </ScrollView>
